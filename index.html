@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- PERUBAHAN UTAMA: Modifikasi viewport -->
+    <meta name="viewport" content="width=1500, initial-scale=1.0"> 
     <title>ECOITS: Optimalisasi Waste Management dan Resiliensi Iklim Kelurahan Tambak Wedi</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -39,7 +40,8 @@
             font-family: 'Poppins', sans-serif;
             color: var(--text);
             line-height: 1.7;
-            overflow-x: hidden;
+            /* Hapus overflow-x: hidden; agar scrolling horizontal dimungkinkan */
+            /* overflow-x: hidden; */ 
             background-color: #f8f9fa;
         }
         
@@ -50,13 +52,14 @@
         
         .container {
             width: 100%;
-            max-width: 1200px;
+            /* PERUBAHAN 1: Batas container diperlebar (sudah ada di kode Anda) */
+            max-width: 1500px; /* Sebelumnya 1200px */
             margin: 0 auto;
             padding: 0 20px;
         }
         
         .header {
-            height: 100vh;
+            height: 100vh; /* viewport height akan menyesuaikan dengan viewport virtual yang lebih lebar */
             position: relative;
             background-color: #000;
             overflow: hidden;
@@ -96,7 +99,7 @@
             color: var(--white);
             z-index: 2;
             width: 90%; 
-            max-width: 1050px;
+            max-width: 1050px; 
             padding: 20px;
         }
         
@@ -111,7 +114,8 @@
         }
         
         .header-content h1 {
-            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            /* clamp mungkin tidak berperilaku seperti yang diharapkan jika viewport width tetap besar */
+            font-size: 2.8rem; /* Atau set ke nilai desktop spesifik */
             font-weight: 700;
             line-height: 1.3;
             margin-bottom: 0.7rem; 
@@ -120,7 +124,8 @@
         }
         
         .header-content p {
-            font-size: clamp(0.85rem, 1.8vw, 1.1rem);
+             /* clamp mungkin tidak berperilaku seperti yang diharapkan jika viewport width tetap besar */
+            font-size: 1.1rem; /* Atau set ke nilai desktop spesifik */
             line-height: 1.5;
             margin-bottom: 0; 
             max-width: 100%; 
@@ -316,7 +321,7 @@
         }
 
         .mobile-nav-toggle {
-            display: none;
+            display: none; /* Biarkan tersembunyi karena kita ingin tampilan desktop */
             background: transparent;
             border: none;
             color: var(--white);
@@ -337,7 +342,8 @@
         }
         
         .section-title h2 {
-            font-size: clamp(2rem, 4vw, 2.8rem);
+             /* clamp mungkin tidak berperilaku seperti yang diharapkan jika viewport width tetap besar */
+            font-size: 2.8rem; /* Atau set ke nilai desktop spesifik */
             color: var(--dark);
             display: inline-block;
             padding-bottom: 15px;
@@ -370,13 +376,13 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            flex-wrap: wrap;
+            flex-wrap: wrap; /* Biarkan wrap agar item bisa pindah baris jika diperlukan */
             gap: 40px;
         }
         
         .flex-item {
             flex: 1;
-            min-width: 320px;
+            min-width: 320px; /* Ini akan membantu jika layar masih lebih kecil dari total min-width item */
         }
          .flex-item-50 {
             flex-basis: calc(50% - 20px);
@@ -599,7 +605,7 @@
         }
 
         .solusi-panel {
-            background-color: var(--white); /* Panel tetap putih */
+            background-color: var(--white); 
             border-radius: 10px;
             box-shadow: 0 8px 20px rgba(0,0,0,0.08);
             padding: 25px;
@@ -790,23 +796,57 @@
             font-size: 0.9rem;
         }
         
-        .reveal-on-scroll {
+        /* PERUBAHAN 2: Definisi efek appearance scroll */
+        .reveal-fade-in-up,
+        .reveal-fade-in-left,
+        .reveal-fade-in-right {
             opacity: 0;
-            transform: translateY(50px);
             transition: opacity 0.8s ease-out, transform 0.8s ease-out;
             will-change: opacity, transform; 
         }
-        .reveal-on-scroll.is-visible {
+
+        .reveal-fade-in-up {
+            transform: translateY(50px);
+        }
+        .reveal-fade-in-up.is-visible {
             opacity: 1;
             transform: translateY(0);
         }
-         /* Tambahan untuk spasi antar section jika dibutuhkan */
-        .sub-section-divider {
-            margin-top: 4rem; /* Atur jarak sesuai kebutuhan */
-            padding-top: 2rem; /* Atur padding atas jika perlu */
-            border-top: 1px solid #e0e0e0; /* Garis pemisah tipis jika diinginkan */
+
+        .reveal-fade-in-left {
+            transform: translateX(-50px);
+        }
+        .reveal-fade-in-left.is-visible {
+            opacity: 1;
+            transform: translateX(0);
         }
 
+        .reveal-fade-in-right {
+            transform: translateX(50px);
+        }
+        .reveal-fade-in-right.is-visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        /* Akhir PERUBAHAN 2 */
+
+         /* Tambahan untuk spasi antar section jika dibutuhkan */
+        .sub-section-divider {
+            margin-top: 4rem; 
+            padding-top: 2rem; 
+            border-top: 1px solid #e0e0e0; 
+        }
+
+
+        /* CATATAN: Jika Anda benar-benar ingin tampilan "desktop" mutlak di mobile,
+           Anda mungkin perlu mengomentari atau menghapus SELURUH BLOK MEDIA QUERY DI BAWAH INI.
+           Namun, ini SANGAT TIDAK DIREKOMENDASIKAN karena akan merusak pengalaman pengguna mobile.
+           Membiarkan media query ini aktif adalah praktik terbaik untuk desain web responsif.
+           Dengan viewport="width=1500", media query ini mungkin tidak akan terpicu di banyak perangkat,
+           tetapi jika ada perangkat dengan resolusi viewport fisik lebih besar dari 1500px, mereka bisa saja aktif.
+        */
+
+        /* 
         @media (max-width: 992px) {
             #mainNavLinks { 
                 display: none; 
@@ -913,11 +953,11 @@
             }
             
             .mobile-nav-toggle { 
-                display: block;
+                 display: block; // Jika ingin tetap ada tombol toggle, walaupun navigasi utama mungkin tidak berubah drastis 
             }
 
             .flex-item-50, .flex-item-40, .flex-item-60 {
-                flex-basis: 100%;
+                flex-basis: 100%; // Dengan viewport tetap, ini akan membuat item menumpuk pada lebar 1500px jika tidak muat
             }
             .team-section-layout {
                 flex-direction: column;
@@ -929,10 +969,10 @@
         
         @media (max-width: 768px) {
             .header-content {
-                flex-direction: column; 
-                text-align: center; 
+                 flex-direction: column; // Bisa dibiarkan atau dikomentari 
+                 text-align: center; 
                 gap: 15px; 
-                width: 95%; 
+                 width: 95%; // Mengacu pada parent, yaitu viewport 1500px 
             }
             .header-logo-title {
                 max-width: 240px; 
@@ -941,29 +981,27 @@
             .header-text-wrapper {
                 text-align: center; 
             }
-            .header-content h1 {
-                font-size: clamp(1.6rem, 5.5vw, 2.2rem); 
-                line-height: 1.3;
+             .header-content h1 {
+                 font-size: 2.2rem; // Gunakan nilai desktop jika media query diabaikan
             }
             .header-content p {
-                font-size: clamp(0.8rem, 3.3vw, 0.95rem); 
-                line-height: 1.5;
+                font-size: 0.95rem; // Gunakan nilai desktop jika media query diabaikan
             }
             
             .flex-container {
-                flex-direction: column;
+                 flex-direction: column; // Bisa dibiarkan atau dikomentari
                 gap: 30px;
             }
             
             .flex-item {
-                width: 100%;
+                width: 100%; // Mengacu pada parent
             }
 
             .section {
                  padding: 3rem 0;
             }
              .section-title h2 {
-                font-size: clamp(1.8rem, 5vw, 2.2rem);
+                 font-size: 2.2rem; // Gunakan nilai desktop jika media query diabaikan
             }
             .map-container, .gee-app-container {
                 height: 450px; 
@@ -972,7 +1010,7 @@
                  height: 500px;
             }
              .footer-content {
-                flex-direction: column;
+                flex-direction: column; // Bisa dibiarkan atau dikomentari
                 text-align: center;
             }
             .footer-column {
@@ -989,13 +1027,13 @@
                 height: 450px; 
             }
             .dampak-sampah-gallery {
-                flex-direction: column; 
+                 flex-direction: column; // Bisa dibiarkan atau dikomentari
             }
             .dampak-sampah-gallery .image-item {
                 max-width: 100%; 
             }
              .solusi-panel-header {
-                flex-direction: column; 
+                 flex-direction: column; // Bisa dibiarkan atau dikomentari
                 align-items: center;
                 text-align: center;
             }
@@ -1003,10 +1041,12 @@
                 margin-top: 10px; 
             }
         }
+        */
         
     </style>
 </head>
 <body>
+    <!-- Konten HTML Anda tidak berubah -->
     <header class="header" id="home">
         <video class="video-background" autoplay muted loop playsinline poster="placeholder-image.jpg">
             <source src="Background.mp4" type="video/mp4">
@@ -1069,18 +1109,18 @@
         </nav>
     </div>
 
-    <section class="section reveal-on-scroll" id="tentang-tambak-wedi">
+    <section class="section reveal-fade-in-up" id="tentang-tambak-wedi">
         <div class="container">
             <div class="section-title">
                 <h2>Tentang Tambak Wedi</h2>
             </div>
             <div class="flex-container">
-                <div class="flex-item flex-item-60 reveal-on-scroll">
+                <div class="flex-item flex-item-60 reveal-fade-in-left">
                     <div class="map-container">
                         <iframe src="https://ee-adityarakanugraha11.projects.earthengine.app/view/administrasi-interaktif" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
                     </div>
                 </div>
-                <div class="flex-item flex-item-40 reveal-on-scroll">
+                <div class="flex-item flex-item-40 reveal-fade-in-right">
                     <div class="text-content">
                         <h3>Gambaran Umum</h3>
                         <p>Kelurahan Tambak Wedi merupakan kawasan pesisir yang terletak di Kecamatan Kenjeran, Kota Surabaya. Letaknya strategis di sisi timur kota, tak jauh dari pintu masuk Jembatan Suramadu. Wilayah ini menyuguhkan lanskap alami yang khas: pemandangan laut yang langsung menghadap ke Selat Madura. Siluet megah Suramadu tampak membingkai cakrawala, menciptakan panorama yang memesona saat matahari terbit maupun terbenam.</p>
@@ -1090,14 +1130,13 @@
             </div>
             
             <div class="flex-container" style="margin-top: 3rem; align-items: center;">
-                <div class="flex-item flex-item-40 reveal-on-scroll">
+                <div class="flex-item flex-item-40 reveal-fade-in-up">
                     <div class="logo-container">
                         <img src="City_of_Surabaya_Logo.svg.png" alt="Logo Pemkot Surabaya">
                         <h3 class="typewriter-pemkot">Kelurahan Tambak Wedi</h3>
                     </div>
                 </div>
-                <div class="flex-item flex-item-60 reveal-on-scroll">
-                    <!-- MODIFIED VIDEO CONTAINER TO USE YOUTUBE EMBED -->
+                <div class="flex-item flex-item-60 reveal-fade-in-up">
                     <div class="video-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000;">
                         <iframe 
                             style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
@@ -1114,19 +1153,19 @@
         </div>
     </section>
 
-    <section class="section reveal-on-scroll" id="permasalahan" style="background-color: var(--light);">
+    <section class="section reveal-fade-in-left" id="permasalahan" style="background-color: var(--light);">
         <div class="container">
             <div class="section-title">
                 <h2>Permasalahan Sampah di Tambak Wedi</h2>
             </div>
             <div class="flex-container">
-                <div class="flex-item flex-item-50 reveal-on-scroll">
+                <div class="flex-item flex-item-50 reveal-fade-in-up">
                     <div class="chart-container">
                         <canvas id="sampahChart"></canvas>
                     </div>
-                     <p class="caption-text">Data Produksi Sampah 10 TPS di Surabaya Termasuk TPS 3R Tambak Wedi (Sumber: Olah Data 2024)</p>
+                     <p class="caption-text">Sumber: Sistem Informasi Pengelolaan Sampah Nasional (KLHK, 2024)</p>
                 </div>
-                <div class="flex-item flex-item-50 reveal-on-scroll">
+                <div class="flex-item flex-item-50 reveal-fade-in-up">
                     <div class="text-content">
                         <h3>Tantangan Pengelolaan Sampah</h3>
                         <p>Permasalahan sampah menjadi salah satu tantangan utama di berbagai wilayah perkotaan, termasuk Surabaya. Histogram di samping menunjukkan volume sampah masuk dan sampah yang berhasil terkelola di 10 Tempat Pengolahan Sampah (TPS) terpilih, termasuk TPS 3R Tambak Wedi. Data ini memberikan gambaran mengenai kapasitas pengelolaan sampah di masing-masing TPS dan menyoroti TPS 3R Tambak Wedi secara khusus.</p>
@@ -1138,26 +1177,26 @@
         </div>
     </section>
 
-    <section class="section reveal-on-scroll" id="dampak-sampah">
+    <section class="section reveal-fade-in-right" id="dampak-sampah">
         <div class="container">
             <div class="section-title">
                 <h2>Dampak Sampah Terhadap Perubahan Iklim</h2>
             </div>
-            <div class="text-content reveal-on-scroll" style="margin-bottom: 2rem;">
+            <div class="text-content reveal-fade-in-up" style="margin-bottom: 2rem;">
                 <p>Permasalahan sampah di Kelurahan Tambak Wedi memberikan dampak signifikan terhadap lingkungan dan kehidupan masyarakat, baik secara lokal maupun global. Akumulasi sampah, terutama dari aliran Sungai Pegirian dan Kali Tebu, menyumbat sistem drainase yang seharusnya mengalirkan air hujan dan pasang laut. Akibatnya, genangan meluas hingga ke permukiman warga, terutama saat musim hujan atau pasang tinggi, menyebabkan kerusakan infrastruktur, terganggunya aktivitas harian, hingga peningkatan risiko penyakit akibat lingkungan yang tercemar.</p>
             </div>
             
-            <div class="dampak-sampah-gallery reveal-on-scroll">
-                <div class="image-item reveal-on-scroll">
+            <div class="dampak-sampah-gallery reveal-fade-in-left">
+                <div class="image-item reveal-fade-in-up">
                     <img src="Gambar_Sampah.png" alt="Sampah menumpuk di pinggir sungai">
                 </div>
-                <div class="image-item reveal-on-scroll">
+                <div class="image-item reveal-fade-in-up">
                     <img src="SampahWedi1.png" alt="Sampah di sekitar Sungai Tambak Wedi">
                 </div>
             </div>
-            <p class="caption-text reveal-on-scroll" style="margin-bottom: 2rem;">Sampah di Sekitar Sungai Tambak Wedi.</p>
+            <p class="caption-text reveal-fade-in-up" style="margin-bottom: 2rem;">Kiri: Ilustrasi GRK Yang Dikeluarkan Sampah || Kanan: Sampah di Sekitar Sungai Kali Tebu.</p>
             
-            <div class="text-content reveal-on-scroll" style="margin-top: 2rem;">
+            <div class="text-content reveal-fade-in-right" style="margin-top: 2rem;">
                 <h3>Keterkaitan dengan Isu Global</h3>
                 <p>Sampah yang tidak terkelola dengan baik juga berkontribusi terhadap perubahan iklim. Sampah organik yang membusuk secara anaerob menghasilkan gas metana (CH₄), gas rumah kaca yang 25 kali lebih kuat dari CO₂ dalam memerangkap panas, dan pembakaran serta produksi sampah plastik menghasilkan emisi CO₂ yang besar. Kedua gas ini memperkuat efek rumah kaca dan berkontribusi pada pemanasan global serta perubahan iklim, termasuk kenaikan muka air laut dan risiko banjir rob di kawasan pesisir seperti Tambak Wedi.</p>
                 <p>Pencemaran laut oleh sampah plastik juga mengganggu fitoplankton, organisme laut yang penting dalam menyerap karbon melalui fotosintesis. Mikroplastik menghambat pertumbuhan fitoplankton dengan mengurangi cahaya matahari dan mengganggu fungsi biologisnya, sehingga menurunkan kapasitas laut dalam menyerap CO₂ dan mempercepat perubahan iklim.</p>
@@ -1167,19 +1206,19 @@
         </div>
     </section>
 
-    <section class="section reveal-on-scroll" id="ecoits-section" style="background-color: var(--light);">
+    <section class="section reveal-fade-in-up" id="ecoits-section" style="background-color: var(--light);">
         <div class="container">
             <div class="section-title">
                 <h2>Program ECOITS</h2>
             </div>    
                  <p class="section-subtitle"><em>Environmental and Coastal Optimization for Integrated Trash and Sustainable City</em></p>
             <div class="flex-container" style="align-items: center;">
-                <div class="flex-item flex-item-40 reveal-on-scroll">
+                <div class="flex-item flex-item-40 reveal-fade-in-left">
                     <div class="logo-container">
-                         <img src="Kompak5.JPEG" alt="Logo ECOITS Project" style="max-width: 450px; border-radius:1px; background: #fff; padding:10px;">
+                         <img src="Kompak5.JPEG" alt="Logo ECOITS Project" style="max-width: 500px; border-radius:10px; background: #fff; padding:6px;">
                     </div>
                 </div>
-                <div class="flex-item flex-item-60 reveal-on-scroll">
+                <div class="flex-item flex-item-60 reveal-fade-in-right">
                     <div class="text-content">
                         <h3>Solusi Terpadu untuk Tambak Wedi</h3>
                         <p>Sebagai solusi terhadap permasalahan banjir limpasan akibat sampah di Kelurahan Tambak Wedi, kami mengusulkan program ECOITS (<em>Environmental and Coastal Optimization for Integrated Trash and Sustainable City</em>), sebuah pendekatan terpadu yang menggabungkan teknologi geomatika dengan pemberdayaan masyarakat untuk menciptakan lingkungan pesisir yang tangguh dan berkelanjutan.</p>
@@ -1191,41 +1230,41 @@
         </div>
     </section>
 
-    <section class="section reveal-on-scroll" id="sdgs-perubahan-iklim">
+    <section class="section reveal-fade-in-up" id="sdgs-perubahan-iklim">
         <div class="container">
             <div class="section-title">
                 <h2>SDGs 9, 11, dan 13: Penanganan Perubahan Iklim Untuk Permukiman Dan Infrastruktur Yang Berkelanjutan</h2>
             </div>
             <div class="flex-container">
-                <div class="flex-item flex-item-60 reveal-on-scroll"> 
+                <div class="flex-item flex-item-60 reveal-fade-in-left"> 
                     <div class="text-content">
                         <p>Penelitian kami ini selaras dengan tujuan Pembangunan Berkelanjutan (SDGs) ke-9, 11, dan 13 dengan berfokus kepada pentingnya tindakan segera untuk mengatasi perubahan iklim dan dampaknya sebagai tantangan global yang memengaruhi seluruh aspek kehidupan untuk menciptakan kota yang berkelanjutan dan infrastruktur yang merata. Fokus kami, yaitu pada Goal 13 dalam Tujuan Pembangunan Berkelanjutan (TPB) atau yang dikenal dengan sebutan SDGs memiliki tujuan mengambil aksi segera untuk memerangi perubahan iklim dan dampaknya karena perubahan iklim adalah tantangan global yang memengaruhi setiap orang. SDGs dalam universitas berfokus pada mengeksplorasi penelitian universitas tentang perubahan iklim, penggunaan energi dan persiapan untuk menghadapi konsekuensi dari perubahan iklim. Tujuan Pembangunan Berkelanjutan 13 menyerukan tindakan untuk memerangi perubahan iklim dan dampaknya. Pada SDGS 13: 13.1.2* menjelaskan dalam upaya mengatasi perubahan iklim dan dampaknya, SDGs 13 menekankan pentingnya strategi nasional dalam penanggulangan bencana yang sejalan dengan Kerangka Kerja Sendai 2015-2030.</p>
                     </div>
                 </div>
-                <div class="flex-item flex-item-40 reveal-on-scroll"> 
+                <div class="flex-item flex-item-40 reveal-fade-in-right"> 
                     <div class="image-container">
                         <img src="SDGS.png" alt="SDGs Goals Illustration" style="max-height: 400px; object-fit: contain; margin: auto; display:block;">
-                         <p class="caption-text">Ilustrasi Tujuan Pembangunan Berkelanjutan (SDGs).</p>
+                         <p class="caption-text">Tujuan Pembangunan Berkelanjutan (SDGs 9, 11, 13).</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section reveal-on-scroll" id="metode-ahp" style="background-color: var(--light);">
+    <section class="section reveal-fade-in-left" id="metode-ahp" style="background-color: var(--light);">
         <div class="container">
             <div class="section-title">
                 <h2>Metode Analytic Hierarchy Process (AHP)</h2>
             </div>
             <div class="flex-container" style="align-items: center;">
-                 <div class="flex-item flex-item-60 reveal-on-scroll">
+                 <div class="flex-item flex-item-60 reveal-fade-in-up">
                     <div class="text-content">
                         <h3>Dasar Pengambilan Keputusan</h3>
                         <p>AHP (Analytic Hierarchy Process) merupakan sebuah metode yang dikembangkan pada akhir tahun 1970 oleh Saaty. Analitycal Hierarchy Process (AHP) adalah metode untuk memecahkan suatu situasi yang kompleks tidak terstruktur kedalam beberapa komponen dalam susunan yang hirarki, dengan memberi nilai subjektif tentang pentingnya setiap variabel secara relatif, dan menetapkan variabel mana yang memiliki prioritas paling tinggi guna memengaruhi hasil pada situasi tersebut (Saaty, T., 1993).</p>
                         <p>Metode AHP sudah banyak diaplikasikan dalam bidang pendidikan, teknik, pemerintahan, industri, manajemen, manufaktur, olahraga dan lain-lain (Saaty, 1980). AHP merupakan tools pengambilan keputusan untuk menangani evaluasi multi-kriteria yang dapat dikombinasikan dengan analisis spasial SIG secara terintegrasi untuk pemilihan kriteria lokasi yang sesuai (Chaudhary, 2016).</p>
                     </div>
                 </div>
-                <div class="flex-item flex-item-40 reveal-on-scroll">
+                <div class="flex-item flex-item-40 reveal-fade-in-up">
                     <div class="image-container">
                         <img src="AHP_ILUSTRASI.png" alt="Diagram Analytic Hierarchy Process">
                         <p class="caption-text">Ilustrasi proses AHP.</p>
@@ -1235,19 +1274,19 @@
         </div>
     </section>
     
-    <section class="section reveal-on-scroll" id="kelerengan">
+    <section class="section reveal-fade-in-right" id="kelerengan">
         <div class="container">
             <div class="section-title">
                 <h2>Analisis Kelerengan</h2>
             </div>
             <div class="flex-container">
-                <div class="flex-item flex-item-50 reveal-on-scroll">
+                <div class="flex-item flex-item-50 reveal-fade-in-left">
                     <div class="text-content">
                         <h3>Peta Kelerengan Tambak Wedi</h3>
                         <p>Berdasarkan Peta Kelerengan Kelurahan Tambak Wedi, wilayah ini didominasi oleh kemiringan sangat landai dengan kelas kelerengan >00–02%, yang ditunjukkan oleh warna hijau muda dan mencerminkan topografi datar serta kerentanan terhadap genangan air dan banjir rob. Kelas kelerengan lainnya seperti >02-08% dan >08–15% tersebar di area tengah hingga barat, menunjukkan lahan yang masih dapat dimanfaatkan dengan perencanaan drainase yang baik. Sementara kelas >15–25% dan >25-45% hanya terdapat di beberapa titik seperti tanggul atau struktur lahan buatan di pesisir timur laut. Secara umum, wilayah Tambak Wedi didominasi oleh topografi datar hingga landai, menjadikannya kawasan yang rentan terhadap banjir limpasan dan banjir rob, serta membutuhkan sistem pengelolaan air dan sampah yang optimal untuk mencegah bencana hidrometeorologi.</p>
                     </div>
                 </div>
-                <div class="flex-item flex-item-50 reveal-on-scroll">
+                <div class="flex-item flex-item-50 reveal-fade-in-right">
                     <div class="gee-app-container"> 
                         <iframe src="https://ee-adityarakanugraha11.projects.earthengine.app/view/peta-kelerengan-ecoits" allowfullscreen></iframe>
                     </div>
@@ -1257,19 +1296,19 @@
         </div>
     </section>
 
-    <section class="section reveal-on-scroll" id="los-displacement" style="background-color: var(--light);">
+    <section class="section reveal-fade-in-up" id="los-displacement" style="background-color: var(--light);">
         <div class="container">
             <div class="section-title">
                 <h2>Analisis LOS Displacement</h2>
             </div>
             <div class="flex-container">
-                <div class="flex-item flex-item-50 reveal-on-scroll">
+                <div class="flex-item flex-item-50 reveal-fade-in-left">
                     <div class="text-content">
                         <h3>Peta LOS Displacement</h3>
                         <p>Berikut merupakan hasil analisis Line of Sight (LOS) Displacement di Kelurahan Tambak Wedi dalam rentang waktu 2018 hingga 2024. Berdasarkan peta yang ditampilkan, wilayah ini mengalami penurunan tanah (subsidence) dengan nilai perpindahan maksimum sebesar 0,46 meter dan minimum 0 meter. Warna pink hingga orange pada peta menggambarkan tingkat deformasi yang signifikan, menunjukkan bahwa bagian selatan dan tengah Tambak Wedi merupakan area yang paling rentan mengalami penurunan muka tanah. Analisis ini sangat penting karena menunjukkan potensi bahaya geoteknik dan risiko lingkungan yang dapat berdampak pada keberlanjutan infrastruktur dan permukiman di kawasan pesisir tersebut. Data ini menjadi dasar yang kuat untuk pengambilan keputusan dalam perencanaan tata ruang dan strategi adaptasi perubahan iklim berbasis geospasial.</p>
                     </div>
                 </div>
-                <div class="flex-item flex-item-50 reveal-on-scroll">
+                <div class="flex-item flex-item-50 reveal-fade-in-right">
                     <div class="gee-app-container"> 
                         <iframe src="https://ee-adityarakanugraha11.projects.earthengine.app/view/peta-los-displacement-ecoits" allowfullscreen></iframe>
                     </div>
@@ -1279,19 +1318,19 @@
         </div>
     </section>
 
-    <section class="section reveal-on-scroll" id="kerentanan-banjir">
+    <section class="section reveal-fade-in-left" id="kerentanan-banjir">
         <div class="container">
             <div class="section-title">
                 <h2>Analisis Kerentanan Banjir</h2>
             </div>
             <div class="flex-container">
-                 <div class="flex-item flex-item-50 reveal-on-scroll">
+                 <div class="flex-item flex-item-50 reveal-fade-in-up">
                     <div class="text-content">
                         <h3>Peta Tingkat Kerentanan Banjir</h3>
                         <p>Peta Kerentanan Banjir Kelurahan Tambak Wedi membagi wilayah ke dalam empat kelas: Rendah, Sedang, Tinggi, dan Sangat Tinggi. Area dengan kerentanan rendah (Biru Muda) berada di utara, dekat zona tambak dan intertidal, kemungkinan karena elevasi lebih tinggi atau drainase yang baik. Tingkat sedang (hijau muda) mendominasi bagian utara-timur, yang masih berpotensi tergenang saat hujan lebat atau pasang laut. Kerentanan tinggi (kuning) tersebar di tengah hingga selatan, mencerminkan daerah padat dengan topografi datar dan sistem drainase terbatas. Kerentanan sangat tinggi (merah) terletak di selatan, khususnya di sekitar Jalan Tambak Wedi, yang rawan banjir akibat kombinasi limpasan hujan dan air rob. Wilayah ini memerlukan strategi mitigasi dan perbaikan tata kelola air secara menyeluruh.</p>
                     </div>
                 </div>
-                <div class="flex-item flex-item-50 reveal-on-scroll">
+                <div class="flex-item flex-item-50 reveal-fade-in-up">
                     <div class="gee-app-container"> 
                         <iframe src="https://ee-adityarakanugraha11.projects.earthengine.app/view/peta-kerentanan-banjir" allowfullscreen></iframe>
                     </div>
@@ -1301,19 +1340,19 @@
         </div>
     </section>
 
-    <section class="section reveal-on-scroll" id="tutupan-lahan" style="background-color: var(--light);">
+    <section class="section reveal-fade-in-right" id="tutupan-lahan" style="background-color: var(--light);">
         <div class="container">
             <div class="section-title">
                 <h2>Analisis Tutupan Lahan</h2>
             </div>
             <div class="flex-container">
-                <div class="flex-item flex-item-50 reveal-on-scroll">
+                <div class="flex-item flex-item-50 reveal-fade-in-left">
                     <div class="text-content">
                         <h3>Peta Jenis Tutupan Lahan</h3>
                         <p>Peta tutupan lahan Kelurahan Tambak Wedi menunjukkan wilayah yang didominasi oleh permukiman (Biru Tua) di bagian tengah hingga selatan, menandakan kepadatan penduduk yang tinggi. Area tambak (Hijau keabu-abu an) di barat laut yang mencerminkan aktivitas budidaya perikanan. Badan air seperti sungai dan kolam (biru muda) tersebar di beberapa titik, berperan penting dalam sistem drainase. Vegetasi/Lahan kosong (hijau muda) hanya tampak sedikit dan tersebar tidak merata. Keberagaman ini menunjukkan pentingnya perencanaan tata ruang yang seimbang antara kawasan permukiman, pesisir, dan area produktif untuk keberlanjutan lingkungan dan mitigasi bencana.</p>
                     </div>
                 </div>
-                <div class="flex-item flex-item-50 reveal-on-scroll">
+                <div class="flex-item flex-item-50 reveal-fade-in-right">
                     <div class="gee-app-container"> 
                         <iframe src="https://ee-adityarakanugraha11.projects.earthengine.app/view/peta-tutupan-lahan-ecoits" allowfullscreen></iframe>
                     </div>
@@ -1323,19 +1362,19 @@
         </div>
     </section>
 
-    <section class="section reveal-on-scroll" id="peta-ahp-sub">
+    <section class="section reveal-fade-in-up" id="peta-ahp-sub">
         <div class="container">
             <div class="section-title">
                 <h2>Hasil Pembobotan AHP</h2>
             </div>
             <div class="flex-container">
-                 <div class="flex-item flex-item-50 reveal-on-scroll">
+                 <div class="flex-item flex-item-50 reveal-fade-in-left">
                     <div class="text-content">
                         <h3>Peta Hasil Analisis AHP</h3>
                         <p>Peta hasil analisis AHP (Analytical Hierarchy Process) di atas menunjukkan tingkat kesesuaian lokasi untuk Tempat Pembuangan Sementara (TPS) di Kelurahan Tambak Wedi yang diklasifikasikan ke dalam empat kategori: sangat sesuai, sesuai, kurang sesuai, dan tidak sesuai. Warna Biru Tua dan Biru Muda yang mendominasi wilayah utara dan timur menunjukkan area yang paling direkomendasikan untuk pembangunan TPS, sedangkan warna kuning dan merah di bagian selatan dan barat menandakan wilayah yang kurang layak. Terdapat empat parameter yang digunakan untuk analisis kesesuaian lokasi TPS yaitu tutupan lahan (65%), penurunan muka tanah (12%), wilayah rentan banjir (18%), dan kelerengan (5%). Visualisasi ini memberikan dasar spasial yang kuat dalam perencanaan lokasi TPS secara efektif, efisien, dan ramah lingkungan.</p>
                     </div>
                 </div>
-                <div class="flex-item flex-item-50 reveal-on-scroll">
+                <div class="flex-item flex-item-50 reveal-fade-in-right">
                     <div class="gee-app-container"> 
                         <iframe src="https://ee-adityarakanugraha11.projects.earthengine.app/view/peta-ahp-ecoits" allowfullscreen></iframe>
                     </div>
@@ -1345,19 +1384,19 @@
         </div>
     </section>
 
-    <section class="section reveal-on-scroll" id="lokasi-rekomendasi-tps" style="background-color: var(--light);">
+    <section class="section reveal-fade-in-left" id="lokasi-rekomendasi-tps" style="background-color: var(--light);">
         <div class="container">
             <div class="section-title">
                 <h2>Rekomendasi Lokasi TPS</h2>
             </div>
             <div class="flex-container">
-                <div class="flex-item flex-item-50 reveal-on-scroll">
+                <div class="flex-item flex-item-50 reveal-fade-in-up">
                     <div class="text-content">
                         <h3>Peta Rekomendasi Penempatan TPS</h3>
                         <p>Berdasarkan hasil analisis AHP yang mengintegrasikan berbagai faktor seperti kelerengan, LOS displacement (stabilitas lahan), kerentanan banjir, dan tutupan lahan, peta ini menyajikan rekomendasi lokasi-lokasi strategis untuk penempatan Tempat Pengolahan Sampah (TPS) baru di Kelurahan Tambak Wedi. Lokasi yang direkomendasikan (ditandai dengan simbol khusus) dipilih karena memenuhi kriteria kesesuaian tertinggi, memastikan operasional TPS yang efektif, minim risiko lingkungan, dan mudah dijangkau oleh masyarakat serta armada pengangkut sampah. Rekomendasi ini bertujuan untuk meningkatkan cakupan layanan pengelolaan sampah dan mengurangi dampak negatif dari pembuangan sampah liar.</p>
                     </div>
                 </div>
-                <div class="flex-item flex-item-50 reveal-on-scroll">
+                <div class="flex-item flex-item-50 reveal-fade-in-up">
                     <div class="gee-app-container"> 
                         <iframe src="https://ee-adityarakanugraha11.projects.earthengine.app/view/peta-rekomendasi-tps-ecoits" allowfullscreen></iframe>
                     </div>
@@ -1367,31 +1406,28 @@
         </div>
     </section>
 
-    <!-- SECTION PREDIKSI GENANGAN - NOW INCLUDES SOLUSI & REKOMENDASI -->
-    <section class="section reveal-on-scroll" id="prediksi-genangan">
+    <section class="section reveal-fade-in-right" id="prediksi-genangan">
         <div class="container">
             <div class="section-title">
                 <h2>Prediksi Genangan & Solusi Rekomendasi</h2>
             </div>
-            <div class="text-content reveal-on-scroll" style="margin-bottom: 2rem; max-width:900px; margin-left:auto; margin-right:auto;">
+            <div class="text-content reveal-fade-in-up" style="margin-bottom: 2rem; max-width:900px; margin-left:auto; margin-right:auto;">
                  <h3>Antisipasi Dampak Perubahan Iklim</h3>
                 <p>Peta prediksi genangan ini mengilustrasikan potensi dampak kenaikan muka air laut (Sea Level Rise - SLR) di Kelurahan Tambak Wedi hingga tahun 2080. Menggunakan model elevasi digital dan skenario SLR berdasarkan proyeksi IPCC, area yang berpotensi tergenang (ditunjukkan dengan warna biru) secara signifikan meluas, terutama di kawasan pesisir utara dan sekitar muara sungai. Pemukiman padat di bagian selatan dan infrastruktur vital juga terancam. Visualisasi ini menegaskan urgensi adaptasi perubahan iklim, termasuk penguatan infrastruktur pesisir, relokasi strategis, dan perbaikan sistem drainase, untuk meningkatkan resiliensi Tambak Wedi terhadap ancaman banjir rob di masa depan.</p>
             </div>
-            <div class="gee-app-container reveal-on-scroll" style="height: 600px; margin-bottom:1rem;">
+            <div class="gee-app-container reveal-fade-in-left" style="height: 600px; margin-bottom:1rem;">
                 <iframe src="https://ee-adityarakanugraha11.projects.earthengine.app/view/peta-genangan-kenaikan-air-laut" allowfullscreen></iframe>
             </div>
             <p class="caption-text" style="font-size: 1.1rem; font-weight: 500; margin-bottom: 4rem;">Prediksi Genangan Akibat Kenaikan Muka Air Laut Sampai Tahun 2080</p>
 
-            <!-- MOVED CONTENT: Solusi dan Rekomendasi -->
-            <div class="sub-section-divider reveal-on-scroll"> <!-- Optional: for visual separation -->
-                <div class="section-title" style="margin-top: 2rem;"> <!-- Reuse section title style if desired -->
+            <div class="sub-section-divider reveal-fade-in-right"> 
+                <div class="section-title" style="margin-top: 2rem;">
                      <h2>Solusi dan Rekomendasi</h2>
                  </div>
-                 <p class="section-subtitle reveal-on-scroll">Strategi dan Langkah Konkret untuk Pengelolaan Sampah dan Resiliensi Iklim yang Lebih Baik.</p>
+                 <p class="section-subtitle reveal-fade-in-up">Strategi dan Langkah Konkret untuk Pengelolaan Sampah dan Resiliensi Iklim yang Lebih Baik.</p>
             
                 <div class="solusi-panels-container">
-                    <!-- Panel 1 -->
-                    <div class="solusi-panel reveal-on-scroll">
+                    <div class="solusi-panel reveal-fade-in-up">
                         <div class="solusi-panel-header">
                             <h3 class="solusi-panel-title">Pengembangan Sistem Optimalisasi Penempatan TPS Berbasis GPS dan Analisis Kesesuaian Lahan</h3>
                             <img src="Panel1.png" alt="Ilustrasi Panel 1" class="solusi-panel-image">
@@ -1403,78 +1439,105 @@
                         <button class="solusi-selengkapnya-btn" aria-expanded="false">Selengkapnya <i class="fas fa-chevron-down"></i></button>
                     </div>
 
-                    <!-- Panel 2 -->
-                    <div class="solusi-panel reveal-on-scroll">
+                    <div class="solusi-panel reveal-fade-in-left">
                         <div class="solusi-panel-header">
                             <h3 class="solusi-panel-title">Integrasi Peta Prediksi ke dalam WebGIS Interaktif untuk Mitigasi Banjir Limpasan dan Pengelolaan Sampah</h3>
                              <img src="Panel2.png" alt="Ilustrasi Panel 2" class="solusi-panel-image">
                         </div>
                         <div class="solusi-panel-content-hidden">
-                            <p>Pemerintah kelurahan dapat memanfaatkan WebGIS ini sebagai alat utama dalam perencanaan tata ruang adaptif dan edukasi masyarakat, dengan melibatkan warga dalam pelatihan penggunaan sistem untuk meningkatkan kesiapsiagaan dan partisipasi dalam pengurangan risiko bencana. Selain itu, WebGIS juga dapat menjadi platform untuk visualisasi data sampah, rute pengangkutan sampah yang optimal, dan sebagai bahan mitigasi seperti perencanaan pembangunan tanggul, penanaman mangrove, dan relokasi TPS yang lebih efektif berdasarkan data spasial yang akurat.</p>
+                            <p><strong>WebGIS ECOITS dapat dimanfaatkan oleh pemerintah kelurahan sebagai:</strong></p>
+                            <ul style="list-style-type: disc; margin-left: 20px; margin-bottom: 15px;">
+                                <li style="margin-bottom: 8px;">Alat perencanaan tata ruang adaptif.</li>
+                                <li style="margin-bottom: 8px;">Media edukasi masyarakat.</li>
+                                <li style="margin-bottom: 8px;">Sarana meningkatkan kesiapsiagaan warga akan permasalahan yang ada.</li>
+                                <li style="margin-bottom: 8px;">Mendorong partisipasi warga dalam pengurangan risiko bencana.</li>
+                            </ul>
+                            <p><strong>Penggunaan Platform ECOITS untuk:</strong></p>
+                            <ul style="list-style-type: disc; margin-left: 20px; margin-bottom: 15px;">
+                                <li style="margin-bottom: 8px;">Visualisasi data sampah.</li>
+                                <li style="margin-bottom: 8px;">Menyusun rute pengangkutan sampah yang optimal.</li>
+                                <li style="margin-bottom: 8px;">Perencanaan mitigasi berbasis data, seperti:</li>
+                                <ol style="list-style-type: decimal; margin-left: 30px;">
+                                    <li style="margin-bottom: 8px;">Pembangunan tanggul yang lebih tinggi.</li>
+                                    <li style="margin-bottom: 8px;">Penanaman dan konservasi mangrove.</li>
+                                    <li style="margin-bottom: 8px;">Penempatan TPS berdasarkan analisis data spasial yang akurat.</li>
+                                </ol>
+                            </ul>
                         </div>
                         <button class="solusi-selengkapnya-btn" aria-expanded="false">Selengkapnya <i class="fas fa-chevron-down"></i></button>
                     </div>
 
-                    <!-- Panel 3 -->
-                    <div class="solusi-panel reveal-on-scroll">
+                    <div class="solusi-panel reveal-fade-in-right">
                         <div class="solusi-panel-header">
                             <h3 class="solusi-panel-title">Rekomendasi Pengembangan Permukiman Pesisir Berketahanan Iklim dan Edukasi Masyarakat Sesuai dengan Poin SDGs 13</h3>
                             <img src="Panel3.png" alt="Ilustrasi Panel 3" class="solusi-panel-image">
                         </div>
                         <div class="solusi-panel-content-hidden">
-                            <p>Sebagai rekomendasi bagi pemerintah, pengembangan permukiman pesisir berketahanan iklim di Tambak Wedi dapat dilakukan melalui relokasi bertahap ke wilayah aman bagi masyarakat yang tinggal di zona risiko sangat tinggi, pembangunan permukiman vertikal adaptif untuk efisiensi lahan, serta peningkatan infrastruktur seperti tanggul laut, sistem drainase terpadu, dan TPS dengan desain elevated (ditinggikan) untuk menghindari genangan. Infrastruktur hijau seperti sabuk mangrove juga penting untuk menahan abrasi dan limpasan.</p>
-                            <p>Untuk edukasi masyarakat, WebGIS dapat dimanfaatkan sebagai media visual dalam sosialisasi di sekolah dan komunitas. Program Kampung Iklim Adaptif (Proklim) perlu didorong lebih masif, serta pelibatan warga dalam pelaporan kondisi lingkungan (misalnya melalui aplikasi mobile) untuk mendukung peningkatan kapasitas adaptasi masyarakat sesuai target SDGs 13.1.2 (Meningkatkan pendidikan, penyadartahuan, dan kapasitas manusia serta institusi mengenai mitigasi, adaptasi, pengurangan dampak dan peringatan dini perubahan iklim).</p>
+                            <p><strong>Rekomendasi untuk pengembangan permukiman pesisir:</strong></p>
+                            <ul style="list-style-type: disc; margin-left: 20px; margin-bottom: 15px;">
+                                <li style="margin-bottom: 8px;">Relokasi bertahap masyarakat ke wilayah aman dari zona risiko sangat tinggi.</li>
+                                <li style="margin-bottom: 8px;">Pembangunan permukiman vertikal adaptif dengan meninggikan bangunan setinggi 0,61 meter dari permukaan tanah.</li>
+                                <li style="margin-bottom: 8px;">Peningkatan infrastruktur seperti:</li>
+                                <ol style="list-style-type: decimal; margin-left: 30px;">
+                                    <li style="margin-bottom: 8px;">Tanggul laut.</li>
+                                    <li style="margin-bottom: 8px;">Sistem drainase terpadu.</li>
+                                    <li style="margin-bottom: 8px;">Tempat Pengumpulan Sampah (TPS) dengan desain elevated (ditinggikan) untuk menghindari genangan.</li>
+                                </ol>
+                                <li style="margin-bottom: 8px;">Penerapan infrastruktur hijau, seperti sabuk mangrove untuk:</li>
+                                <ol style="list-style-type: decimal; margin-left: 30px;">
+                                    <li style="margin-bottom: 8px;">Menahan abrasi.</li>
+                                    <li style="margin-bottom: 8px;">Mengurangi limpasan air.</li>
+                                </ol>
+                            </ul>
                         </div>
                         <button class="solusi-selengkapnya-btn" aria-expanded="false">Selengkapnya <i class="fas fa-chevron-down"></i></button>
                     </div>
                 </div>
             </div>
-            <!-- END MOVED CONTENT: Solusi dan Rekomendasi -->
         </div>
     </section>
-    <!-- END SECTION PREDIKSI GENANGAN -->
 
 
-    <section class="section reveal-on-scroll" id="team" style="background-color: var(--white);">
+    <section class="section reveal-fade-in-up" id="team" style="background-color: var(--white);">
         <div class="container">
             <div class="section-title">
-                <h2>Tim di Balik ECOITS</h2>
+                <h2>Behind ECOITS</h2>
             </div>
             <div class="team-section-layout">
-                <div class="team-intro flex-item-40 reveal-on-scroll">
+                <div class="team-intro flex-item-40 reveal-fade-in-left">
                     <h3 style="font-size: 1.5rem; color: var(--dark); margin-bottom:1rem;">People Behind ECOITS</h3>
                     <div class="text-content">
                          <p>Tim ECOITS terdiri dari enam anggota dengan peran saling melengkapi. Aditya Raka Nugraha sebagai Data Analyst mengolah data spasial dan lingkungan. Vera Mei Suhardini dan Thufail Amru Ad'Dausi bertindak sebagai Project Officer dan Wakilnya, mengoordinasikan jalannya proyek. Zahra Nanda Emiliandini A. menjamin keselamatan tim sebagai petugas K3, sementara Clara Sapaduma Meivanda menyajikan visualisasi data sebagai Editor dan Designer. Racka Ichwan Zamora berperan sebagai Surveyor yang memimpin kegiatan lapangan. Dengan semangat kolaborasi dan slogan “One Action, One Map, for Many Solutions,” tim ECOITS membuktikan bahwa tindakan strategis berbasis pemetaan dapat menghadirkan solusi berkelanjutan bagi masyarakat.</p>
                     </div>
                 </div>
-                <div class="team-members-container flex-item-60 reveal-on-scroll">
+                <div class="team-members-container flex-item-60 reveal-fade-in-right">
                     <div class="team-grid">
-                        <div class="team-member reveal-on-scroll">
+                        <div class="team-member reveal-fade-in-up">
                             <img src="Eco_Aditya.png" alt="Aditya Raka Nugraha">
                             <h4>Aditya Raka Nugraha</h4>
                             <p>Data Analyst</p>
                         </div>
-                        <div class="team-member reveal-on-scroll">
+                        <div class="team-member reveal-fade-in-up">
                             <img src="Eco_Vera.png" alt="Vera Mei Suhardini">
                             <h4>Vera Mei Suhardini</h4>
                             <p>Project Officer</p>
                         </div>
-                        <div class="team-member reveal-on-scroll">
+                        <div class="team-member reveal-fade-in-up">
                             <img src="Eco_Thufail.png" alt="Thufail Amru Ad Dausi">
                             <h4>Thufail Amru Ad'Dausi</h4>
                             <p>Vice Project Officer</p>
                         </div>
-                        <div class="team-member reveal-on-scroll">
+                        <div class="team-member reveal-fade-in-up">
                             <img src="Eco_Nanda.png" alt="Zahra Nanda Emiliandini A">
                             <h4>Zahra Nanda Emiliandini A.</h4>
-                            <p>P3K</p>
+                            <p>K3</p>
                         </div>
-                        <div class="team-member reveal-on-scroll">
+                        <div class="team-member reveal-fade-in-up">
                             <img src="Eco_Vanda.png" alt="Clara Sapaduma Meivanda">
                             <h4>Clara Sapaduma Meivanda</h4>
                             <p>Editor and Designer</p>
                         </div>
-                        <div class="team-member reveal-on-scroll">
+                        <div class="team-member reveal-fade-in-up">
                             <img src="Eco_Racka.png" alt="Racka Ichwan Zamora">
                             <h4>Racka Ichwan Zamora</h4>
                             <p>Surveyor</p>
@@ -1488,8 +1551,8 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-column logo-col reveal-on-scroll">
-                    <a href="#home"><img src="SOPLOGOKEMKER.png" alt="Logo Kemitraan" class="footer-logo"></a>
+                <div class="footer-column logo-col reveal-fade-in-up">
+                    <a href="#home"><img src="LastAll.png" alt="Logo Kemitraan" class="footer-logo"></a>
                     <h4 class="footer-logo-text" style="color:var(--white);">ECOITS Initiative</h4>
                     <p class="footer-description" style="font-size:0.85rem; line-height:1.5;">Program optimalisasi pengelolaan sampah dan peningkatan resiliensi iklim di Kelurahan Tambak Wedi melalui pendekatan geodetik untuk pemukiman berkelanjutan.</p>
                     <div class="footer-social">
@@ -1499,19 +1562,20 @@
                     </div>
                 </div>
 
-                <div class="footer-column program-col reveal-on-scroll">
+                <div class="footer-column program-col reveal-fade-in-left">
                     <h3>Sinergi Program</h3>
                     <ul class="footer-links">
-                        <li class="footer-link"><a>Kementerian Desa PDTT</a></li>
-                        <li class="footer-link"><a>Pemprov Jatim</a></li>
-                        <li class="footer-link"><a>Pemkot Surabaya</a></li>
-                        <li class="footer-link"><a>BPS Kota Surabaya</a></li>
+                        <li class="footer-link"><a href="https://pemerintahan.surabaya.go.id/kelurahan_tambak_wedi" target="_blank">Kelurahan Tambak Wedi</a></li>
+                        <li class="footer-link"><a href="https://bpbd.surabaya.go.id/view" target="_blank">BPBD Surabaya</a></li>
+                        <li class="footer-link"><a href="https://geologi.esdm.go.id/geomap" target="_blank">Kementrian ESDM</a></li>
+                        <li class="footer-link"><a href="https://sipsn.menlhk.go.id/sipsn/" target="_blank">Kementrian LHK</a></li>
+                        <li class="footer-link"><a href="https://tanahair.indonesia.go.id/portal-web/" target="_blank">Badan Informasi Geospasial</a></li>
+                        <li class="footer-link"><a href="https://www.its.ac.id/tgeomatika/id/beranda/" target="_blank">Teknik Geomatika ITS</a></li>
                         <li class="footer-link"><a href="https://www.its.ac.id/" target="_blank">ITS Surabaya</a></li>
-                        <li class="footer-link"><a href="https://surabaya.telkomuniversity.ac.id/" target="_blank">Telkom University Surabaya</a></li>
                     </ul>
                 </div>
 
-                <div class="footer-column contact-col reveal-on-scroll">
+                <div class="footer-column contact-col reveal-fade-in-right">
                     <h3>Info Kontak</h3>
                     <ul class="footer-links">
                         <li class="footer-link"><i class="fas fa-map-marker-alt"></i>Gedung Teknik Geomatika, Kampus ITS, Keputih, Sukolilo, Surabaya 60111, Jawa Timur</li>
@@ -1522,14 +1586,19 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                Copyright © <span id="currentYear"></span> ECOITS Team - Teknik Geomatika ITS. All Rights Reserved. <br>
-                Inspired by <a href="https://pemerintahan.surabaya.go.id/kelurahan_tambak_wedi" target="_blank" style="color:var(--accent); text-decoration:underline;">Website Kelurahan Tambak Wedi</a>
-                & <a href="https://surabaya.telkomuniversity.ac.id/" target="_blank" style="color:var(--accent); text-decoration:underline;">Telkom University Surabaya</a>.
+                Copyright © <span id="currentYear"></span> ECOITS Team - Teknik Geomatika ITS. All Rights Reserved.
             </div>
         </div>
     </footer>
 
     <script>
+        // JavaScript Anda (fungsi chart, navigasi, dll) tetap sama.
+        // Dengan viewport="width=1500", JavaScript yang berkaitan dengan
+        // window.innerWidth akan menganggap lebar adalah 1500 (atau lebih jika layar fisik lebih besar).
+        // Ini berarti logika untuk navigasi mobile (.mobile-nav-toggle) mungkin tidak akan terpicu
+        // seperti yang diharapkan jika Anda ingin menu mobile pada layar "desktop" yang diperkecil ini.
+        // Anda mungkin perlu menyesuaikan logika JS jika Anda ingin fitur mobile tetap ada.
+
         // Variabel global untuk elemen-elemen yang sering diakses
         let sections = null;
         let allNavLinks = null; 
@@ -1769,8 +1838,8 @@
             
             window.addEventListener("scroll", navHighlighter);
 
-            const revealElements = document.querySelectorAll('.reveal-on-scroll');
-            const revealObserverOptions = { root: null, threshold: 0.1 }; // Ensure this is not too low for sub-sections
+            const revealElements = document.querySelectorAll('.reveal-fade-in-up, .reveal-fade-in-left, .reveal-fade-in-right');
+            const revealObserverOptions = { root: null, threshold: 0.1 }; 
             const revealObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -1780,8 +1849,25 @@
             }, revealObserverOptions);
             revealElements.forEach(el => revealObserver.observe(el));
 
-            if (mobileNavToggleEl) {
+            // Dengan viewport fixed, logika navigasi mobile mungkin tidak diperlukan
+            // atau perlu diuji secara menyeluruh. Jika CSS @media query di-nonaktifkan,
+            // elemen .mobile-nav-toggle juga tidak akan tampil.
+            // Jika CSS @media query tetap ada, tetapi viewport diset ke width=1500,
+            // maka window.innerWidth <= 992 akan selalu false pada perangkat
+            // yang me-render pada viewport 1500px, sehingga menu mobile tidak akan aktif.
+            // Jika Anda ingin menu mobile tetap muncul pada tampilan 'desktop yang diperkecil',
+            // Anda harus memodifikasi kondisi `window.innerWidth <= 992` menjadi
+            // sesuatu yang memperhitungkan kondisi viewport yang dipaksakan. Ini kompleks.
+
+            if (mobileNavToggleEl && mainNavLinksEl) { // Pastikan elemen ada
                 mobileNavToggleEl.addEventListener('click', () => {
+                    // Jika ingin selalu mengaktifkan fungsi toggle ini terlepas dari `window.innerWidth`
+                    // karena viewport sudah fix.
+                    // HAPUS/KOMENTARI bagian kondisi if (window.innerWidth <= 992) di dalam event listener di bawah ini
+                    // jika Anda memutuskan untuk menghapus atau mengomentari media query di CSS.
+                    // Atau, biarkan seperti ini dan tombol toggle hanya akan berfungsi jika CSS media query untuk mobile aktif
+                    // DAN viewport-nya di-set ke device-width (bukan yang fixed seperti sekarang).
+
                     const isActive = mainNavLinksEl.classList.toggle('active');
                     mobileNavToggleEl.querySelector('i').classList.toggle('fa-bars', !isActive);
                     mobileNavToggleEl.querySelector('i').classList.toggle('fa-times', isActive);
@@ -1794,7 +1880,11 @@
                     if (this.closest('.mobile-social-icons')) return;
                     
                     const isDropdownParentLink = this.classList.contains('nav-link') && this.parentElement.classList.contains('dropdown');
-                    if (window.innerWidth <= 992) { // Mobile/Tablet view
+                    
+                    // Kondisi ini akan selalu false jika viewport adalah `width=1500` dan
+                    // kode di atas tidak diubah, jadi blok if ini tidak akan berjalan.
+                    // Jika Anda mengomentari/menghapus media query, navigasi akan selalu desktop.
+                    if (window.innerWidth <= 992) { 
                         if (isDropdownParentLink) {
                             e.preventDefault();
                             const parentDropdown = this.parentElement;
@@ -1812,14 +1902,12 @@
                             parentDropdown.classList.toggle('active');
                             this.setAttribute('aria-expanded', isOpening.toString());
                             if (subMenu) subMenu.style.display = isOpening ? 'block' : 'none';
-                        } else { // Is a normal link or a dropdown item link
-                            // Close nav if open
-                            if (mainNavLinksEl.classList.contains('active') && mobileNavToggleEl) {
+                        } else { 
+                            if (mainNavLinksEl && mainNavLinksEl.classList.contains('active') && mobileNavToggleEl) {
                                 mainNavLinksEl.classList.remove('active');
                                 mobileNavToggleEl.querySelector('i').classList.add('fa-bars');
                                 mobileNavToggleEl.querySelector('i').classList.remove('fa-times');
                                 mobileNavToggleEl.setAttribute('aria-expanded', 'false');
-                                // Close all dropdowns too
                                 dropdownsQuery.forEach(dd => {
                                     dd.classList.remove('active');
                                     const sm = dd.querySelector('.dropdown-content');
@@ -1832,8 +1920,9 @@
                 });
             });
 
-            // Close mobile nav on click outside
             document.addEventListener('click', function(event) {
+                // Sama seperti di atas, kondisi window.innerWidth <= 992 akan selalu false
+                // dengan viewport fixed.
                 if (window.innerWidth <= 992 && mainNavLinksEl && mobileNavToggleEl) {
                     if (mainNavLinksEl.classList.contains('active') && 
                         !mobileNavToggleEl.contains(event.target) && 

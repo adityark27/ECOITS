@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <!-- PERUBAHAN UTAMA: Modifikasi viewport -->
-    <meta name="viewport" content="width=1500, initial-scale=1.0"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <title>ECOITS: Optimalisasi Waste Management dan Resiliensi Iklim Kelurahan Tambak Wedi</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -40,8 +40,7 @@
             font-family: 'Poppins', sans-serif;
             color: var(--text);
             line-height: 1.7;
-            /* Hapus overflow-x: hidden; agar scrolling horizontal dimungkinkan */
-            /* overflow-x: hidden; */ 
+            overflow-x: hidden; /* Keep this to prevent unwanted horizontal scroll on mobile */
             background-color: #f8f9fa;
         }
         
@@ -52,14 +51,13 @@
         
         .container {
             width: 100%;
-            /* PERUBAHAN 1: Batas container diperlebar (sudah ada di kode Anda) */
-            max-width: 1500px; /* Sebelumnya 1200px */
+            max-width: 1500px; /* Keep this for desktop if you like wide layouts */
             margin: 0 auto;
             padding: 0 20px;
         }
         
         .header {
-            height: 100vh; /* viewport height akan menyesuaikan dengan viewport virtual yang lebih lebar */
+            height: 100vh; 
             position: relative;
             background-color: #000;
             overflow: hidden;
@@ -114,8 +112,8 @@
         }
         
         .header-content h1 {
-            /* clamp mungkin tidak berperilaku seperti yang diharapkan jika viewport width tetap besar */
-            font-size: 2.8rem; /* Atau set ke nilai desktop spesifik */
+            /* Using clamp for responsive font size */
+            font-size: clamp(2rem, 5vw, 2.8rem); 
             font-weight: 700;
             line-height: 1.3;
             margin-bottom: 0.7rem; 
@@ -124,8 +122,8 @@
         }
         
         .header-content p {
-             /* clamp mungkin tidak berperilaku seperti yang diharapkan jika viewport width tetap besar */
-            font-size: 1.1rem; /* Atau set ke nilai desktop spesifik */
+            /* Using clamp for responsive font size */
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem); 
             line-height: 1.5;
             margin-bottom: 0; 
             max-width: 100%; 
@@ -321,7 +319,7 @@
         }
 
         .mobile-nav-toggle {
-            display: none; /* Biarkan tersembunyi karena kita ingin tampilan desktop */
+            display: none; /* Hidden by default, shown by media query */
             background: transparent;
             border: none;
             color: var(--white);
@@ -342,8 +340,8 @@
         }
         
         .section-title h2 {
-             /* clamp mungkin tidak berperilaku seperti yang diharapkan jika viewport width tetap besar */
-            font-size: 2.8rem; /* Atau set ke nilai desktop spesifik */
+            /* Using clamp for responsive font size */
+            font-size: clamp(2rem, 5vw, 2.8rem); 
             color: var(--dark);
             display: inline-block;
             padding-bottom: 15px;
@@ -366,23 +364,24 @@
 
         .section-subtitle {
             text-align: center;
-            font-size: 1.1rem;
+            font-size: 1.1rem; /* Default size, overridden in media query for specific ones */
             color: var(--text-light);
             margin-top: -2.5rem;
             margin-bottom: 3rem;
+            line-height: 1.5;
         }
         
         .flex-container {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            flex-wrap: wrap; /* Biarkan wrap agar item bisa pindah baris jika diperlukan */
+            flex-wrap: wrap;
             gap: 40px;
         }
         
         .flex-item {
             flex: 1;
-            min-width: 320px; /* Ini akan membantu jika layar masih lebih kecil dari total min-width item */
+            min-width: 320px;
         }
          .flex-item-50 {
             flex-basis: calc(50% - 20px);
@@ -488,6 +487,7 @@
             margin-top: 1rem;
             font-style: italic;
             color: var(--text-light);
+            font-size: 0.9rem; /* Default, overridden for specific captions if needed */
         }
         
         .logo-container {
@@ -719,7 +719,7 @@
             color: var(--white);
         }
         .footer-description {
-            font-size: 0.9rem;
+            font-size: 0.9rem; /* Adjusted from 0.85 for slightly better readability if needed */
             margin-bottom: 1.5rem;
             line-height: 1.6;
         }
@@ -796,7 +796,6 @@
             font-size: 0.9rem;
         }
         
-        /* PERUBAHAN 2: Definisi efek appearance scroll */
         .reveal-fade-in-up,
         .reveal-fade-in-left,
         .reveal-fade-in-right {
@@ -828,26 +827,19 @@
             opacity: 1;
             transform: translateX(0);
         }
-        /* Akhir PERUBAHAN 2 */
 
-         /* Tambahan untuk spasi antar section jika dibutuhkan */
-        .sub-section-divider {
+         .sub-section-divider {
             margin-top: 4rem; 
             padding-top: 2rem; 
             border-top: 1px solid #e0e0e0; 
         }
 
-
-        /* CATATAN: Jika Anda benar-benar ingin tampilan "desktop" mutlak di mobile,
-           Anda mungkin perlu mengomentari atau menghapus SELURUH BLOK MEDIA QUERY DI BAWAH INI.
-           Namun, ini SANGAT TIDAK DIREKOMENDASIKAN karena akan merusak pengalaman pengguna mobile.
-           Membiarkan media query ini aktif adalah praktik terbaik untuk desain web responsif.
-           Dengan viewport="width=1500", media query ini mungkin tidak akan terpicu di banyak perangkat,
-           tetapi jika ada perangkat dengan resolusi viewport fisik lebih besar dari 1500px, mereka bisa saja aktif.
-        */
-
-        /* 
+        /* === START: UNCOMMENTED AND ENABLED MEDIA QUERIES === */
         @media (max-width: 992px) {
+            .navbar .container {
+                padding: 0 15px; /* Slightly reduce padding for navbar container on tablet */
+            }
+
             #mainNavLinks { 
                 display: none; 
                 position: absolute;
@@ -953,11 +945,11 @@
             }
             
             .mobile-nav-toggle { 
-                 display: block; // Jika ingin tetap ada tombol toggle, walaupun navigasi utama mungkin tidak berubah drastis 
+                 display: block; 
             }
 
             .flex-item-50, .flex-item-40, .flex-item-60 {
-                flex-basis: 100%; // Dengan viewport tetap, ini akan membuat item menumpuk pada lebar 1500px jika tidak muat
+                flex-basis: 100%; /* Stack items on tablets */
             }
             .team-section-layout {
                 flex-direction: column;
@@ -965,57 +957,92 @@
              .solusi-panels-container {
                 grid-template-columns: 1fr; 
             }
+            .container {
+                 max-width: 95%; /* Slightly narrower container on tablet */
+            }
         }
         
         @media (max-width: 768px) {
             .header-content {
-                 flex-direction: column; // Bisa dibiarkan atau dikomentari 
+                 flex-direction: column; 
                  text-align: center; 
-                gap: 15px; 
-                 width: 95%; // Mengacu pada parent, yaitu viewport 1500px 
+                 gap: 15px; 
+                 width: 95%;
             }
             .header-logo-title {
-                max-width: 240px; 
-                margin-bottom: 30px; 
+                max-width: 200px; /* Smaller logo on mobile */
+                margin-bottom: 20px; 
             }
             .header-text-wrapper {
                 text-align: center; 
             }
              .header-content h1 {
-                 font-size: 2.2rem; // Gunakan nilai desktop jika media query diabaikan
+                 font-size: 1.8rem; /* Specific smaller size for mobile */
             }
             .header-content p {
-                font-size: 0.95rem; // Gunakan nilai desktop jika media query diabaikan
+                font-size: 0.9rem; /* Specific smaller size for mobile */
             }
             
             .flex-container {
-                 flex-direction: column; // Bisa dibiarkan atau dikomentari
-                gap: 30px;
+                 flex-direction: column;
+                 gap: 30px;
             }
             
             .flex-item {
-                width: 100%; // Mengacu pada parent
+                width: 100%; 
+                min-width: unset; /* Allow flex items to be fully responsive */
             }
+            .flex-item-50, .flex-item-40, .flex-item-60 {
+                flex-basis: 100%; 
+            }
+
 
             .section {
                  padding: 3rem 0;
             }
              .section-title h2 {
-                 font-size: 2.2rem; // Gunakan nilai desktop jika media query diabaikan
+                 font-size: 2rem; /* Specific smaller size for mobile */
             }
             .map-container, .gee-app-container {
-                height: 450px; 
+                height: 400px; /* Reduced height for map/app on mobile */
             }
             .section#prediksi-genangan .gee-app-container { 
-                 height: 500px;
+                 height: 450px; /* Slightly more for the prediction map */
             }
+            .chart-container {
+                height: 400px; 
+                padding: 15px; /* Less padding for chart container */
+            }
+             .dampak-sampah-gallery {
+                 flex-direction: column;
+            }
+            .dampak-sampah-gallery .image-item {
+                max-width: 100%; 
+            }
+             .solusi-panel-header {
+                 flex-direction: column;
+                 align-items: center;
+                 text-align: center;
+            }
+            .solusi-panel-image {
+                margin-top: 10px; 
+                width: 60px; /* Smaller image in solusi panel */
+                height: 60px;
+            }
+
+            /* --- FIXES FOR PROBLEM 2: FOOTER --- */
              .footer-content {
-                flex-direction: column; // Bisa dibiarkan atau dikomentari
+                flex-direction: column; 
                 text-align: center;
             }
             .footer-column {
-                margin-bottom: 2rem;
+                flex-basis: 100% !important; /* Ensure they stack */
+                min-width: unset !important; /* Override desktop min-widths */
+                margin-bottom: 2.5rem;
             }
+             .footer-column:last-child {
+                 margin-bottom: 0;
+             }
             .footer-column h3::after {
                 left: 50%;
                 transform: translateX(-50%);
@@ -1023,25 +1050,48 @@
             .footer-social {
                 justify-content: center;
             }
-            .chart-container {
-                height: 450px; 
+            .footer-description {
+                 font-size: 0.85rem;
             }
-            .dampak-sampah-gallery {
-                 flex-direction: column; // Bisa dibiarkan atau dikomentari
+             .footer-link i { /* Make icons slightly smaller or adjust spacing if needed */
+                font-size: 0.9em;
+                margin-right: 5px;
             }
-            .dampak-sampah-gallery .image-item {
-                max-width: 100%; 
+
+            /* --- FIXES FOR PROBLEM 3: OVERSIZED TEXT --- */
+            /* "Environmental and Coastal Optimization..." */
+            #ecoits-section .section-subtitle {
+                font-size: 1rem; 
+                line-height: 1.4;
+                margin-top: -2rem;
+                margin-bottom: 2rem;
             }
-             .solusi-panel-header {
-                 flex-direction: column; // Bisa dibiarkan atau dikomentari
-                align-items: center;
-                text-align: center;
+            /* "Kiri: Ilustrasi GRK..." */
+            #dampak-sampah .dampak-sampah-gallery + .caption-text {
+                font-size: 0.8rem; 
+                line-height: 1.3;
+                padding: 0 10px; /* Add some padding if text is too wide */
             }
-            .solusi-panel-image {
-                margin-top: 10px; 
+            /* "Prediksi Genangan Akibat Kenaikan Muka Air Laut..." */
+            #prediksi-genangan .gee-app-container + .caption-text {
+                font-size: 0.9rem; 
+                font-weight: normal;
+                line-height: 1.4;
+                padding: 0 10px; /* Add some padding */
+            }
+            /* "Strategi dan Langkah Konkret..." */
+            #prediksi-genangan .sub-section-divider .section-subtitle {
+                font-size: 0.95rem; 
+                line-height: 1.4;
+                margin-top: -1.5rem;
+                margin-bottom: 2.5rem;
+                 padding: 0 10px; /* Add some padding */
+            }
+            .text-content p {
+                font-size: 0.9rem; /* General paragraph text in text-content */
             }
         }
-        */
+        /* === END: UNCOMMENTED AND ENABLED MEDIA QUERIES === */
         
     </style>
 </head>
@@ -1103,7 +1153,7 @@
                 </li>
             </ul>
 
-            <button class="mobile-nav-toggle" aria-label="Toggle navigation">
+            <button class="mobile-nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
                 <i class="fas fa-bars"></i>
             </button>
         </nav>
@@ -1215,7 +1265,7 @@
             <div class="flex-container" style="align-items: center;">
                 <div class="flex-item flex-item-40 reveal-fade-in-left">
                     <div class="logo-container">
-                         <img src="Kompak5.JPEG" alt="Logo ECOITS Project" style="max-width: 500px; border-radius:10px; background: #fff; padding:6px;">
+                         <img src="Kompak5.JPEG" alt="Logo ECOITS Project" style="max-width: 100%; border-radius:10px; background: #fff; padding:6px;">
                     </div>
                 </div>
                 <div class="flex-item flex-item-60 reveal-fade-in-right">
@@ -1243,7 +1293,7 @@
                 </div>
                 <div class="flex-item flex-item-40 reveal-fade-in-right"> 
                     <div class="image-container">
-                        <img src="SDGS.png" alt="SDGs Goals Illustration" style="max-height: 400px; object-fit: contain; margin: auto; display:block;">
+                        <img src="SDGS.png" alt="SDGs Goals Illustration" style="max-height: 300px; object-fit: contain; margin: auto; display:block;">
                          <p class="caption-text">Tujuan Pembangunan Berkelanjutan (SDGs 9, 11, 13).</p>
                     </div>
                 </div>
@@ -1415,10 +1465,10 @@
                  <h3>Antisipasi Dampak Perubahan Iklim</h3>
                 <p>Analisis peta prediksi genangan ini menggunakan dua parameter penting yaitu kenaikan muka air laut dan penurunan muka tanah. Menghitung prediksi nilai kenaikan muka air laut dan penurunan muka tanah pada tahun tertentu di mana menurut Suhelmi (2012) asumsi penurunan tanah dan kenaikan muka air laut terjadi secara linier. Setelah diketahui nilai prediksi kenaikan muka air laut dan penurunan muka tanah pada tahun tertentu, kemudian membuat model geospasialnya dengan menggunakan tool “Raster Calculator”. Pada tahun 2080, wilayah Tambak Wedi tergenang seluruhnya. Faktor yang paling berpengaruh terhadap prediksi genangan ini adalah penurunan muka tanah. Visualisasi ini menegaskan urgensi adaptasi perubahan iklim, termasuk penguatan infrastruktur pesisir, relokasi strategis, dan perbaikan sistem drainase, untuk meningkatkan resiliensi Tambak Wedi terhadap ancaman banjir rob di masa depan.</p>
             </div>
-            <div class="gee-app-container reveal-fade-in-left" style="height: 600px; margin-bottom:1rem;">
+            <div class="gee-app-container reveal-fade-in-left" style="margin-bottom:1rem;">
                 <iframe src="https://ee-adityarakanugraha11.projects.earthengine.app/view/peta-genangan-kenaikan-air-laut" allowfullscreen></iframe>
             </div>
-            <p class="caption-text" style="font-size: 1.1rem; font-weight: 500; margin-bottom: 4rem;">Prediksi Genangan Akibat Kenaikan Muka Air Laut Sampai Tahun 2080</p>
+            <p class="caption-text" style="font-weight: 500; margin-bottom: 4rem;">Prediksi Genangan Akibat Kenaikan Muka Air Laut Sampai Tahun 2080</p>
 
             <div class="sub-section-divider reveal-fade-in-right"> 
                 <div class="section-title" style="margin-top: 2rem;">
@@ -1554,7 +1604,7 @@
                 <div class="footer-column logo-col reveal-fade-in-up">
                     <a href="#home"><img src="LastAll.png" alt="Logo Kemitraan" class="footer-logo"></a>
                     <h4 class="footer-logo-text" style="color:var(--white);">ECOITS Initiative</h4>
-                    <p class="footer-description" style="font-size:0.85rem; line-height:1.5;">Program optimalisasi pengelolaan sampah dan peningkatan resiliensi iklim di Kelurahan Tambak Wedi melalui pendekatan geodetik untuk pemukiman berkelanjutan.</p>
+                    <p class="footer-description">Program optimalisasi pengelolaan sampah dan peningkatan resiliensi iklim di Kelurahan Tambak Wedi melalui pendekatan geodetik untuk pemukiman berkelanjutan.</p>
                     <div class="footer-social">
                         <a href="https://www.instagram.com/ecoit5" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                         <a href="#" target="_blank" aria-label="TikTok (Coming Soon)"><i class="fab fa-tiktok"></i></a>
@@ -1592,13 +1642,7 @@
     </footer>
 
     <script>
-        // JavaScript Anda (fungsi chart, navigasi, dll) tetap sama.
-        // Dengan viewport="width=1500", JavaScript yang berkaitan dengan
-        // window.innerWidth akan menganggap lebar adalah 1500 (atau lebih jika layar fisik lebih besar).
-        // Ini berarti logika untuk navigasi mobile (.mobile-nav-toggle) mungkin tidak akan terpicu
-        // seperti yang diharapkan jika Anda ingin menu mobile pada layar "desktop" yang diperkecil ini.
-        // Anda mungkin perlu menyesuaikan logika JS jika Anda ingin fitur mobile tetap ada.
-
+        // JavaScript (fungsi chart, navigasi, dll) 
         // Variabel global untuk elemen-elemen yang sering diakses
         let sections = null;
         let allNavLinks = null; 
@@ -1710,8 +1754,9 @@
                                     font: { size: 14 }
                                 },
                                 ticks: {
-                                    maxRotation: 45, 
-                                    minRotation: 0
+                                    autoSkip: false, // Important for many labels
+                                    maxRotation: 70, 
+                                    minRotation: 45
                                 }
                             }
                         },
@@ -1849,25 +1894,9 @@
             }, revealObserverOptions);
             revealElements.forEach(el => revealObserver.observe(el));
 
-            // Dengan viewport fixed, logika navigasi mobile mungkin tidak diperlukan
-            // atau perlu diuji secara menyeluruh. Jika CSS @media query di-nonaktifkan,
-            // elemen .mobile-nav-toggle juga tidak akan tampil.
-            // Jika CSS @media query tetap ada, tetapi viewport diset ke width=1500,
-            // maka window.innerWidth <= 992 akan selalu false pada perangkat
-            // yang me-render pada viewport 1500px, sehingga menu mobile tidak akan aktif.
-            // Jika Anda ingin menu mobile tetap muncul pada tampilan 'desktop yang diperkecil',
-            // Anda harus memodifikasi kondisi `window.innerWidth <= 992` menjadi
-            // sesuatu yang memperhitungkan kondisi viewport yang dipaksakan. Ini kompleks.
 
-            if (mobileNavToggleEl && mainNavLinksEl) { // Pastikan elemen ada
+            if (mobileNavToggleEl && mainNavLinksEl) { 
                 mobileNavToggleEl.addEventListener('click', () => {
-                    // Jika ingin selalu mengaktifkan fungsi toggle ini terlepas dari `window.innerWidth`
-                    // karena viewport sudah fix.
-                    // HAPUS/KOMENTARI bagian kondisi if (window.innerWidth <= 992) di dalam event listener di bawah ini
-                    // jika Anda memutuskan untuk menghapus atau mengomentari media query di CSS.
-                    // Atau, biarkan seperti ini dan tombol toggle hanya akan berfungsi jika CSS media query untuk mobile aktif
-                    // DAN viewport-nya di-set ke device-width (bukan yang fixed seperti sekarang).
-
                     const isActive = mainNavLinksEl.classList.toggle('active');
                     mobileNavToggleEl.querySelector('i').classList.toggle('fa-bars', !isActive);
                     mobileNavToggleEl.querySelector('i').classList.toggle('fa-times', isActive);
@@ -1881,33 +1910,34 @@
                     
                     const isDropdownParentLink = this.classList.contains('nav-link') && this.parentElement.classList.contains('dropdown');
                     
-                    // Kondisi ini akan selalu false jika viewport adalah `width=1500` dan
-                    // kode di atas tidak diubah, jadi blok if ini tidak akan berjalan.
-                    // Jika Anda mengomentari/menghapus media query, navigasi akan selalu desktop.
-                    if (window.innerWidth <= 992) { 
+                    // Check if mobile navigation is active (visible toggle button AND nav links are collapsible)
+                    if (window.getComputedStyle(mobileNavToggleEl).display !== 'none') { 
                         if (isDropdownParentLink) {
                             e.preventDefault();
                             const parentDropdown = this.parentElement;
                             const subMenu = parentDropdown.querySelector('.dropdown-content');
                             const isOpening = !parentDropdown.classList.contains('active');
                             
+                            // Close other open dropdowns
                             dropdownsQuery.forEach(otherDropdown => {
                                 if (otherDropdown !== parentDropdown && otherDropdown.classList.contains('active')) {
                                     otherDropdown.classList.remove('active');
                                     const otherSubMenu = otherDropdown.querySelector('.dropdown-content');
-                                    if (otherSubMenu) otherSubMenu.style.display = 'none';
+                                    if (otherSubMenu) otherSubMenu.style.display = 'none'; // Ensure it's hidden
                                     otherDropdown.querySelector('a.nav-link').setAttribute('aria-expanded', 'false');
                                 }
                             });
                             parentDropdown.classList.toggle('active');
                             this.setAttribute('aria-expanded', isOpening.toString());
-                            if (subMenu) subMenu.style.display = isOpening ? 'block' : 'none';
+                            if (subMenu) subMenu.style.display = isOpening ? 'block' : 'none'; // Toggle display
                         } else { 
+                            // If a non-dropdown link is clicked in mobile menu, close the menu
                             if (mainNavLinksEl && mainNavLinksEl.classList.contains('active') && mobileNavToggleEl) {
                                 mainNavLinksEl.classList.remove('active');
                                 mobileNavToggleEl.querySelector('i').classList.add('fa-bars');
                                 mobileNavToggleEl.querySelector('i').classList.remove('fa-times');
                                 mobileNavToggleEl.setAttribute('aria-expanded', 'false');
+                                // Close any open dropdowns as well
                                 dropdownsQuery.forEach(dd => {
                                     dd.classList.remove('active');
                                     const sm = dd.querySelector('.dropdown-content');
@@ -1920,10 +1950,9 @@
                 });
             });
 
+            // Close mobile menu if clicked outside
             document.addEventListener('click', function(event) {
-                // Sama seperti di atas, kondisi window.innerWidth <= 992 akan selalu false
-                // dengan viewport fixed.
-                if (window.innerWidth <= 992 && mainNavLinksEl && mobileNavToggleEl) {
+                if (window.getComputedStyle(mobileNavToggleEl).display !== 'none' && mainNavLinksEl && mobileNavToggleEl) {
                     if (mainNavLinksEl.classList.contains('active') && 
                         !mobileNavToggleEl.contains(event.target) && 
                         !mainNavLinksEl.contains(event.target)) {
